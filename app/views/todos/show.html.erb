@@ -1,0 +1,17 @@
+<br>
+<div class="card">
+  <div class="card-header title">
+  <%if @todo%>
+   <%= @todo.title %>
+  </div>
+  <div class="card-body">
+    <p class="card-text"><%= @todo.body %></p>
+    <h6 class="card-title text-right"><%=session[:userinfo]["name"]%></h6>
+     <div class="btn btn-primary white"><%= link_to 'Edit', edit_todo_path(@todo) %></div>
+     <div class="btn btn-primary white"><%= link_to 'Destroy', todo_path(@todo),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></div>
+    <%else%>
+    <p>You cant view this item</p>
+    <%end%>
+</div>
