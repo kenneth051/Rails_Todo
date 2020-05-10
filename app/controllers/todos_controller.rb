@@ -1,23 +1,24 @@
+# frozen_string_literal: true
+
 class TodosController < ApplicationController
   include Secured
   skip_before_action :logged_in, only: [:login]
 
-  def login
-  end
+  def login; end
 
   def index
     @todos = Todo.all
-    if session[:userinfo]["admin"]
+    if session[:userinfo]['admin']
       @todo_count = @todos.joins(:user).group(:user_id, :name).count(:user_id)
       @users = User.includes(:todos).all
       return
     end
-    id = session[:userinfo]["id"]
-    @todos=@todos.where(:user_id => id)
+    id = session[:userinfo]['id']
+    @todos = @todos.where(user_id: id)
   end
 
   def show
-    @todo = Todo.find_by(id: params[:id], user_id: session[:userinfo]["id"])
+    @todo = Todo.find_by(id: params[:id], user_id: session[:userinfo]['id'])
   end
 
   def new
@@ -29,13 +30,13 @@ class TodosController < ApplicationController
   end
 
   def create
-    todo_params["user_id"] = session[:userinfo]["id"]
-    @todo = Todo.new({ title: todo_params["title"], body: todo_params["body"], user_id: session[:userinfo]["id"] })
+    todo_params['user_id'] = session[:userinfo]['id']
+    @todo = Todo.new({ title: todo_params['title'], body: todo_params['body'], user_id: session[:userinfo]['id'] })
 
     if @todo.save
       redirect_to @todo
     else
-      render "new"
+      render 'new'
     end
   end
 
@@ -45,7 +46,7 @@ class TodosController < ApplicationController
     if @todo.update(todo_params)
       redirect_to @todo
     else
-      render "edit"
+      render 'edit'
     end
   end
 

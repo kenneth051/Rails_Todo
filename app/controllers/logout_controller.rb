@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LogoutController < ApplicationController
   include LogoutHelper
   def logout
