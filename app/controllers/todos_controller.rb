@@ -6,15 +6,14 @@ class TodosController < ApplicationController
   end
 
   def index
-    # @todos = Todo.all
+    @todos = Todo.all
     if session[:userinfo]["admin"]
-    #   @todo_count = @todos.joins(:user).group(:user_id, :name).count(:user_id)
+      @todo_count = @todos.joins(:user).group(:user_id, :name).count(:user_id)
       @users = User.includes(:todos).all
       return
     end
     id = session[:userinfo]["id"]
-    # @todos=@todos.where(:user_id => id)
-    @users = User.all
+    @todos=@todos.where(:user_id => id)
   end
 
   def show
