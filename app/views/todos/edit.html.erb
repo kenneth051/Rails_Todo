@@ -2,16 +2,16 @@
 
 <%= form_with model: @todo,local: true do |form| %>
   <p>
-    <%= form.label :title %><br>
-    <%= form.text_field :title %>
+    <%= form.label :title  %><br>
+    <%= form.text_field :title, class: 'form-control'%>
   </p>
  
   <p>
     <%= form.label :body %><br>
-    <%= form.text_area :body %>
+    <%= form.text_area :body, class: 'form-control'%>
   </p>
  
   <p>
-    <%= form.submit %>
+    <%= form.submit class: 'btn btn-info'%>
   </p>
 <% end %>
