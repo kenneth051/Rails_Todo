@@ -2,8 +2,8 @@
 
 module LogoutHelper
   def logout_url
-    domain = 'dev-osqz35jn.auth0.com'
-    client_id = 'OzTbdwACQhyLgxM75k4npxh0g3Cyw7eT'
+    domain = ENV["domain"]
+    client_id = ENV["client_id"]
     request_params = {
       returnTo: 'http://localhost:3000/login',
       client_id: client_id
